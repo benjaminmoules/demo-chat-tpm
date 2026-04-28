@@ -102,7 +102,7 @@ mandatory reading for any agent working in that file type.
 | 1 | Base chat UI (input + bubbles + echo) | [#1](../../issues/1) | [#3](../../pull/3) |
 | 2 | TPM personality + quick-prompt presets | [#2](../../issues/2) | [#4](../../pull/4) |
 
-Tracked on the **GitHub Project board** linked in the repo *Projects* tab.
+Tracked on the **[Demo Chat TPM Project board](https://github.com/users/benjaminmoules/projects/1)**.
 
 ---
 
