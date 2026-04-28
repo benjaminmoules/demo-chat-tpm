@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Mockup — Demo Chat TPM</title>
+  <style>
+    body { font-family: -apple-system, system-ui, sans-serif; background:#f4f6f9; margin:0; padding:24px; color:#1f2937; }
+    h1 { font-size:18px; color:#475569; margin:0 0 16px; }
+    .frame { max-width:520px; margin:0 auto; background:#fff; border:1px solid #e5e7eb; border-radius:16px; box-shadow:0 8px 24px rgba(15,23,42,.06); overflow:hidden; }
+    .header { padding:14px 18px; background:linear-gradient(135deg,#6366f1,#8b5cf6); color:#fff; font-weight:600; }
+    .thread { padding:16px; height:320px; overflow:auto; background:#fafbfc; }
+    .bubble { padding:10px 14px; border-radius:14px; margin:6px 0; max-width:75%; line-height:1.35; font-size:14px; }
+    .user { background:#6366f1; color:#fff; margin-left:auto; border-bottom-right-radius:4px; }
+    .bot  { background:#fff; border:1px solid #e5e7eb; margin-right:auto; border-bottom-left-radius:4px; }
+    .row  { display:flex; }
+    .presets { display:flex; gap:8px; flex-wrap:wrap; padding:10px 16px; border-top:1px solid #f1f5f9; background:#fff; }
+    .preset { font-size:12px; padding:6px 10px; border:1px solid #e5e7eb; border-radius:999px; background:#f8fafc; cursor:pointer; }
+    .composer { display:flex; gap:8px; padding:12px 16px; border-top:1px solid #f1f5f9; background:#fff; }
+    .composer input { flex:1; padding:10px 12px; border:1px solid #e5e7eb; border-radius:10px; font-size:14px; }
+    .composer button { padding:10px 16px; border:none; border-radius:10px; background:#6366f1; color:#fff; font-weight:600; cursor:pointer; }
+    .note { max-width:520px; margin:16px auto 0; font-size:12px; color:#64748b; }
+  </style>
+</head>
+<body>
+  <h1>Demo Chat TPM — static mockup (UX/UI agent output)</h1>
+  <div class="frame">
+    <div class="header">🤖 TPM Buddy</div>
+    <div class="thread">
+      <div class="row"><div class="bubble bot">Hey! I'm your TPM buddy. Ask me anything roadmap-y.</div></div>
+      <div class="row"><div class="bubble user">Are we on track for the release?</div></div>
+      <div class="row"><div class="bubble bot">Define "on track". Also define "release". Also let's add it to the agenda.</div></div>
+    </div>
+    <div class="presets">
+      <span class="preset">Status of the release?</span>
+      <span class="preset">Any blockers?</span>
+      <span class="preset">Roadmap update?</span>
+      <span class="preset">Standup summary?</span>
+    </div>
+    <div class="composer">
+      <input placeholder="Type a message…" />
+      <button>Send</button>
+    </div>
+  </div>
+  <p class="note">Mockup only — produced before implementation, validated with the audience persona, used as the design reference for PR #1 and PR #2.</p>
+</body>
+</html>
