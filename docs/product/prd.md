@@ -18,7 +18,7 @@ infra, accounts, or build steps.
 
 - G1. Show a working chat in **under 5 seconds** after opening the page.
 - G2. Make the audience laugh at least once (TPM-flavored canned replies).
-- G3. Demonstrate the full HVE Core lifecycle on **2 small features**.
+- G3. Demonstrate the full agentic SDLC lifecycle on **2 small features**.
 
 ## 4. Non-goals
 

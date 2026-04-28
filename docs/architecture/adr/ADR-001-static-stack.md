@@ -28,7 +28,7 @@ framework, no bundler, no backend. State lives in memory only.
 
 ## Rejected alternatives
 
-- **React + Vite (same stack as `smart-cv-generator`)** — more representative
-  of the real repo, but the audience would spend time on tooling instead of
-  on the orchestration philosophy.
+- **React + Vite** — more representative of a modern frontend, but the
+  audience would spend time on tooling instead of on the orchestration
+  philosophy.
 - **Express backend** — unnecessary; canned replies live happily in JS.

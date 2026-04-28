@@ -1,0 +1,81 @@
+<!-- markdownlint-disable-file -->
+# SDLC State: Demo Chat TPM
+
+## Feature
+
+- **Name**: Demo Chat TPM
+- **Slug**: demo-chat-tpm
+- **Branch**: main
+- **Started**: 2026-04-28
+- **PRD Path**: docs/product/prd.md
+- **Mockup**: yes (docs/product/mockup.html)
+- **DB**: no (pure client-side state)
+
+## Current Phase
+
+- **Phase**: 9 — Release Gate (looping for next feature parking lot)
+- **Status**: idle
+- **Active Issue**: —
+- **Active Branch**: —
+
+## Feature Progress
+
+| Issue | Title | Branch | Status | PR | Date |
+|-------|-------|--------|--------|----|------|
+| #1 | F-001 — Base chat UI (input, bubbles, echo bot) | feat/F-001-base-chat-ui (deleted) | done | #3 (merged) | 2026-04-28 |
+| #2 | F-002 — TPM personality + preset prompts | feat/F-002-tpm-personality (deleted) | done | #4 (merged) | 2026-04-28 |
+
+## Phase Log
+
+| Phase | Name | Status | Artifact | Completed |
+|-------|------|--------|----------|-----------|
+| 1 | Discovery | done (human) | — | 2026-04-28 |
+| 2 | PRD Definition | done | docs/product/prd.md | 2026-04-28 |
+| 3 | Backlog Planning | done | docs/product/backlog.md · GitHub issues #1, #2 | 2026-04-28 |
+| 4 | Mockup | done | docs/product/mockup.html | 2026-04-28 |
+| 5 | Architecture and ADRs | done | .copilot-tracking/adrs/2026-04-28/ · docs/architecture/adr/ (mirror) | 2026-04-28 |
+| 6 | DB Schema | skipped | no DB in scope | 2026-04-28 |
+| 7 | RPI Implementation | done | .copilot-tracking/plans/2026-04-28/ · .copilot-tracking/changes/2026-04-28/ | 2026-04-28 |
+| 8 | PR Review | done | .copilot-tracking/reviews/demo-chat-tpm/pr-review-1.md · pr-review-2.md | 2026-04-28 |
+| 9 | Release Gate | done | merged into main; tags pending | 2026-04-28 |
+
+## Tracking Artifacts
+
+| Kind | Path |
+|------|------|
+| State (this file) | `.copilot-tracking/sdlc/demo-chat-tpm/state.md` |
+| ADRs | `.copilot-tracking/adrs/2026-04-28/` |
+| Plans | `.copilot-tracking/plans/2026-04-28/` |
+| Changes Logs | `.copilot-tracking/changes/2026-04-28/` |
+| Implementation Reviews | `.copilot-tracking/reviews/demo-chat-tpm/implementation-review-*.md` |
+| QA Reports | `.copilot-tracking/reviews/demo-chat-tpm/qa-report-*.md` |
+| PR Reviews | `.copilot-tracking/reviews/demo-chat-tpm/pr-review-*.md` |
+
+## Conventions Enforced This Run
+
+- One feature per branch (`feat/F-XXX-*`).
+- One PR per feature, linked to its issue, with explicit AC checklist.
+- Implementation plan validated by a dedicated agent before any code is written.
+- State file (this file) updated at every phase transition.
+- All comments in code remain brief and factual; no narrative commentary.
+
+## Lessons (carry-over from previous projects)
+
+- Too many features at once → the agent loses context and runs collapse.
+  Limit to 1 in-flight feature.
+- Always produce, then *verify*, an implementation plan. Coding without a
+  plan correlates strongly with rework.
+- When the token budget gets tight, use `/clear` or `/compact`. Don't push
+  through.
+- One chat per request. If a request is complex, ask a planning chat to
+  draft the next prompt precisely, then send it from a fresh chat.
+- Verify outputs at every important step — agent output quality decays
+  silently as context fills up.
+- A clean `.github/instructions/<lang>.instructions.md` per language is the
+  single highest-leverage piece of agent setup.
+
+## Parking Lot
+
+- F-003 — localStorage persistence
+- F-004 — light/dark theme toggle
+- F-005 — export thread as Markdown
