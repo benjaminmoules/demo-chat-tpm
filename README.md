@@ -37,8 +37,8 @@ The whole journey is traced in [`/.copilot-tracking/state.md`](.copilot-tracking
 
 | # | Feature | Issue | PR |
 |---|---------|-------|----|
-| 1 | Base chat UI (input + bubbles + echo) | [#1](../../issues/1) | [#?](../../pulls) |
-| 2 | TPM personality + quick-prompt presets | [#2](../../issues/2) | [#?](../../pulls) |
+| 1 | Base chat UI (input + bubbles + echo) | [#1](../../issues/1) | [#3](../../pull/3) |
+| 2 | TPM personality + quick-prompt presets | [#2](../../issues/2) | [#4](../../pull/4) |
 
 ## Key learnings I want to share with my TPM buddies
 

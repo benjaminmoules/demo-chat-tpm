@@ -19,12 +19,12 @@
 | Architecture | Architecture Reviewer | `docs/architecture/adr/ADR-001`, `ADR-002` | ✅ |
 | Schema | (skipped — no DB) | — | ➖ |
 | Backlog → GitHub | Backlog Manager | issues #1, #2 with AC | ✅ |
-| Implement F-001 | RPI agent (research → plan → implement) | PR #1 | ✅ |
-| Test F-001 | QA Product agent | PR #1 review | ✅ |
-| Merge F-001 | PR Reviewer | merged to `main` | ✅ |
-| Implement F-002 | RPI agent | PR #2 | ✅ |
-| Test F-002 | QA Product agent | PR #2 review | ✅ |
-| Merge F-002 | PR Reviewer | merged to `main` | ✅ |
+| Implement F-001 | RPI agent (research → plan → implement) | PR #3 | ✅ |
+| Test F-001 | QA Product agent | PR #3 review checklist | ✅ |
+| Merge F-001 | PR Reviewer | squash-merged to `main` | ✅ |
+| Implement F-002 | RPI agent | PR #4 | ✅ |
+| Test F-002 | QA Product agent | PR #4 review checklist | ✅ |
+| Merge F-002 | PR Reviewer | squash-merged to `main` | ✅ |
 
 ## Decisions captured
 
