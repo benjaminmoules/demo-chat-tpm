@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Demo Chat TPM</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="frame" aria-label="TPM Buddy chat">
+    <header class="header">
+      <span class="avatar" aria-hidden="true">🤖</span>
+      <div>
+        <div class="title">TPM Buddy</div>
+        <div class="subtitle">Demo of the HVE Core orchestration approach</div>
+      </div>
+    </header>
+
+    <section id="thread" class="thread" aria-live="polite" aria-label="Conversation"></section>
+
+    <form id="composer" class="composer" autocomplete="off">
+      <input
+        id="input"
+        class="input"
+        type="text"
+        placeholder="Type a message and press Enter…"
+        aria-label="Type your message"
+      />
+      <button type="submit" class="send">Send</button>
+    </form>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
