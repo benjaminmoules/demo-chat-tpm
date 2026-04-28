@@ -7,19 +7,59 @@
 
 ---
 
+## Prerequisites
+
+- **Node.js ≥ 20** (LTS recommended) — includes `npm`. Check with `node -v`.
+  - Windows: `winget install OpenJS.NodeJS.LTS`
+  - macOS: `brew install node`
+  - Linux: see [nodejs.org/download](https://nodejs.org/en/download)
+- **Git** (only if you're cloning the repo).
+- A modern browser (Chrome, Edge, Firefox, Safari).
+
+> ⚠️ After installing Node.js, **close and reopen your terminal** so the new
+> `PATH` is picked up. Otherwise `npm` will report "command not found".
+
+---
+
 ## TL;DR — clone and run
 
+**macOS / Linux (bash/zsh):**
 ```bash
 git clone https://github.com/benjaminmoules/demo-chat-tpm.git
 cd demo-chat-tpm
-cp .env.example .env       # only one variable: PORT
+cp .env.example .env       # only one variable: PORT (defaults to 5173)
 npm install
 npm start                  # → http://localhost:5173
 npm test                   # 15 unit + integration tests
 ```
 
+**Windows (PowerShell):**
+```powershell
+git clone https://github.com/benjaminmoules/demo-chat-tpm.git
+cd demo-chat-tpm
+Copy-Item .env.example .env
+npm install
+npm start                  # → http://localhost:5173
+npm test                   # 15 unit + integration tests
+```
+
+Stop the server with `Ctrl+C` in the terminal where it's running.
+
 Or just open [`index.html`](index.html) directly in a browser — there is no
-build step.
+build step (the only thing `server.js` adds is serving the files over HTTP
+so ES module imports work without `file://` quirks).
+
+---
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---|---|
+| `npm : The term 'npm' is not recognized` (Windows) | You opened the terminal **before** installing Node.js. Close it, open a new one. |
+| `EADDRINUSE: address already in use :::5173` | Another process owns the port. Either stop it, or change `PORT` in `.env` (e.g. `PORT=5180`) and rerun `npm start`. |
+| Page loads but is blank / module errors in console | You opened `index.html` from the file system. Use `npm start` and visit `http://localhost:5173`. |
+| `npm install` shows audit warnings | Safe to ignore for this demo — they come from dev-only deps (`vitest`, `jsdom`). Don't run `npm audit fix --force`. |
+| Tests fail with "jsdom not found" | Run `npm install` first. The repo doesn't commit `node_modules/`. |
 
 ---
 
