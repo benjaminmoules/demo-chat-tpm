@@ -45,6 +45,37 @@ body {
   align-items: center;
   gap: 12px;
 }
+.header-text { flex: 1; }
+
+.clear {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.clear:hover { background: rgba(255, 255, 255, 0.28); }
+
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 16px;
+  background: #fff;
+  border-top: 1px solid #f1f5f9;
+}
+.preset {
+  font-size: 12px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #f8fafc;
+  cursor: pointer;
+  color: var(--text);
+}
+.preset:hover { background: #eef2ff; border-color: var(--primary); }
 
 .avatar {
   width: 36px;

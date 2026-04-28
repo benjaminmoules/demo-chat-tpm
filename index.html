@@ -10,20 +10,29 @@
   <main class="frame" aria-label="TPM Buddy chat">
     <header class="header">
       <span class="avatar" aria-hidden="true">🤖</span>
-      <div>
+      <div class="header-text">
         <div class="title">TPM Buddy</div>
         <div class="subtitle">Demo of the HVE Core orchestration approach</div>
       </div>
+      <button id="clear" class="clear" type="button" aria-label="Clear conversation">Clear</button>
     </header>
 
     <section id="thread" class="thread" aria-live="polite" aria-label="Conversation"></section>
+
+    <div id="presets" class="presets" aria-label="Quick prompts">
+      <button type="button" class="preset" data-prompt="Status of the release?">📦 Status of the release?</button>
+      <button type="button" class="preset" data-prompt="Any blockers?">🚧 Any blockers?</button>
+      <button type="button" class="preset" data-prompt="Roadmap update please">🗺️ Roadmap update</button>
+      <button type="button" class="preset" data-prompt="Standup summary">☕ Standup summary</button>
+      <button type="button" class="preset" data-prompt="How are we doing on OKRs?">🎯 OKR check-in</button>
+    </div>
 
     <form id="composer" class="composer" autocomplete="off">
       <input
         id="input"
         class="input"
         type="text"
-        placeholder="Type a message and press Enter…"
+        placeholder="Ask your TPM buddy anything…"
         aria-label="Type your message"
       />
       <button type="submit" class="send">Send</button>
