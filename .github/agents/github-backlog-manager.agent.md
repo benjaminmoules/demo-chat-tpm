@@ -15,24 +15,9 @@ linked to a Project board.
 
 ## Issue Template
 
-```markdown
-**Source**: PRD §<n>, Backlog F-<id>
-**Agent trail**: PRD → Mockup → ADR-<n> → this issue → RPI → QA → PR review
-
-## User story
-
-As a <role>, I want <capability>, so that <outcome>.
-
-## Acceptance criteria
-
-- [ ] AC1. …
-- [ ] AC2. …
-- [ ] AC3. …
-
-## Out of scope
-
-- …
-```
+Use [`.github/ISSUE_TEMPLATE/feature.md`](../ISSUE_TEMPLATE/feature.md)
+verbatim — that's the single source GitHub also picks up. Do not embed a
+copy here.
 
 ## Hard Rules
 

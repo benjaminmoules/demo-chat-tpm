@@ -1,5 +1,5 @@
 // Pure logic + Azure CLI auth for the opt-in agentic mode.
-// See docs/architecture/adr/ADR-003-azure-agentic-mode.md.
+// See .copilot-tracking/adrs/2026-04-28/ADR-003-azure-agentic-mode.md.
 
 import { spawn } from "node:child_process";
 

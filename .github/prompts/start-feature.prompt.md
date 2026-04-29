@@ -15,8 +15,8 @@ Demo Chat TPM.
 3. Update the state file at every transition.
 4. Stop after **Phase 3 — Backlog** by creating one GitHub issue with
    acceptance criteria using the template in
-   `.github/agents/github-backlog-manager.agent.md`. Surface the issue
-   number to the user and wait for approval before continuing.
+   `.github/ISSUE_TEMPLATE/feature.md`. Surface the issue number to the
+   user and wait for approval before continuing.
 
 Do not write code. Do not start implementation. The goal of this prompt
 is to produce a validated, well-scoped issue.

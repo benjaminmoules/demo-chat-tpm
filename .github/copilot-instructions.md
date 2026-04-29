@@ -51,15 +51,16 @@ Rules for fixing errors:
 ├── tests/                            # vitest unit + jsdom integration
 ├── docs/
 │   ├── product/                      # PRD, backlog, mockup
-│   └── architecture/adr/             # human-friendly ADR mirror
+│   └── architecture/                 # overview.md (Mermaid diagrams)
 ├── .github/
 │   ├── copilot-instructions.md       # this file
 │   ├── instructions/                 # language-specific rules (applyTo glob)
 │   ├── agents/                       # SDLC orchestrator + RPI + QA + PR review …
 │   ├── prompts/                      # starter prompts
-│   ├── PULL_REQUEST_TEMPLATE.md
-│   └── ISSUE_TEMPLATE/
-└── .copilot-tracking/                # state, plans, changes, reviews, ADRs
+│   ├── templates/                    # agent-shared templates (ADR …)
+│   ├── PULL_REQUEST_TEMPLATE.md      # GitHub-native PR template
+│   └── ISSUE_TEMPLATE/               # GitHub-native issue templates
+└── .copilot-tracking/                # state, plans, changes, reviews, ADRs (canonical)
 ```
 
 ## Development

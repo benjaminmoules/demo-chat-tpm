@@ -4,8 +4,6 @@
 - **Date**: 2026-04-28
 - **Deciders**: Orchestrator agent, Architecture reviewer agent, Product advisor agent
 
-> Canonical copy. Mirror lives at `docs/architecture/adr/ADR-003-azure-agentic-mode.md`.
-
 ## Context
 
 ADR-002 chose canned, deterministic replies to keep the demo offline, key-free,

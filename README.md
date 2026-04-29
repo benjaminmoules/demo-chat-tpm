@@ -77,7 +77,7 @@ produce is committed here, so you can read the whole story in the file tree.
    → [`docs/product/mockup.html`](docs/product/mockup.html)
 3. An **SDLC Orchestrator** agent then dispatches each step to a
    specialist agent:
-   - **Architecture & ADRs** → [`.copilot-tracking/adrs/2026-04-28/`](.copilot-tracking/adrs/2026-04-28)
+   - **Architecture & ADRs** → [`docs/architecture/overview.md`](docs/architecture/overview.md) (Mermaid diagrams) + canonical ADRs in [`.copilot-tracking/adrs/2026-04-28/`](.copilot-tracking/adrs/2026-04-28)
    - **Schema / data model** *(skipped — no DB here)*
    - **Backlog → GitHub** (issues + project board) — *Backlog Manager* agent
    - **Implementation** — *RPI agent* (Research → Plan → Implement →
@@ -95,7 +95,8 @@ produce is committed here, so you can read the whole story in the file tree.
 |---|---|
 | The product brief (PM Advisor) | [`docs/product/prd.md`](docs/product/prd.md) |
 | The mockup (UX/UI Designer) | [`docs/product/mockup.html`](docs/product/mockup.html) |
-| The architecture decisions | [`.copilot-tracking/adrs/2026-04-28/`](.copilot-tracking/adrs/2026-04-28) |
+| The architecture overview (Mermaid) | [`docs/architecture/overview.md`](docs/architecture/overview.md) |
+| The architecture decisions (ADRs) | [`.copilot-tracking/adrs/2026-04-28/`](.copilot-tracking/adrs/2026-04-28) |
 | The lifecycle state file | [`.copilot-tracking/sdlc/demo-chat-tpm/state.md`](.copilot-tracking/sdlc/demo-chat-tpm/state.md) |
 | An implementation plan (RPI) | [`.copilot-tracking/plans/2026-04-28/F-001-base-chat-ui-plan.instructions.md`](.copilot-tracking/plans/2026-04-28/F-001-base-chat-ui-plan.instructions.md) |
 | A changes log (RPI) | [`.copilot-tracking/changes/2026-04-28/F-001-base-chat-ui-changes.md`](.copilot-tracking/changes/2026-04-28/F-001-base-chat-ui-changes.md) |
@@ -104,6 +105,7 @@ produce is committed here, so you can read the whole story in the file tree.
 | A PR review | [`.copilot-tracking/reviews/demo-chat-tpm/pr-review-1.md`](.copilot-tracking/reviews/demo-chat-tpm/pr-review-1.md) |
 | The agents driving the cycle | [`.github/agents/`](.github/agents) |
 | The starter prompts | [`.github/prompts/`](.github/prompts) |
+| The shared agent templates (ADR …) | [`.github/templates/`](.github/templates) |
 
 ---
 
@@ -172,8 +174,10 @@ If anything fails (no `az`, throttled, network down, malformed reply…),
 the app silently falls back to the canned engine — so the audience always
 sees a TPM bubble.
 
-See [`docs/architecture/adr/ADR-003-azure-agentic-mode.md`](docs/architecture/adr/ADR-003-azure-agentic-mode.md)
-for the decision and trade-offs.
+See [`.copilot-tracking/adrs/2026-04-28/ADR-003-azure-agentic-mode.md`](.copilot-tracking/adrs/2026-04-28/ADR-003-azure-agentic-mode.md)
+for the decision and trade-offs, and
+[`docs/architecture/overview.md`](docs/architecture/overview.md) for the
+component and sequence diagrams.
 
 ### Live demo resources (already provisioned)
 
@@ -236,18 +240,19 @@ edits stay on-brand.
 │   ├── product/
 │   │   ├── prd.md  backlog.md  mockup.html
 │   └── architecture/
-│       └── adr/                      # human-friendly mirror of the canonical ADRs
+│       └── overview.md                # Mermaid component + sequence diagrams
 ├── .github/
 │   ├── copilot-instructions.md       # repo-wide rules (highest priority)
 │   ├── instructions/
 │   │   └── javascript.instructions.md
 │   ├── agents/                       # SDLC orchestrator + RPI + QA + PR review …
 │   ├── prompts/                      # starter prompts (start-feature, run-feature)
-│   ├── PULL_REQUEST_TEMPLATE.md
-│   └── ISSUE_TEMPLATE/feature.md
-└── .copilot-tracking/                # state, plans, changes, reviews, ADRs
+│   ├── templates/                    # agent-shared templates (e.g. ADR)
+│   ├── PULL_REQUEST_TEMPLATE.md      # GitHub-native PR template
+│   └── ISSUE_TEMPLATE/feature.md     # GitHub-native issue template
+└── .copilot-tracking/                # state, plans, changes, reviews, ADRs (canonical)
     ├── sdlc/demo-chat-tpm/state.md
-    ├── adrs/2026-04-28/
+    ├── adrs/2026-04-28/              # ADRs live ONLY here
     ├── plans/2026-04-28/
     ├── changes/2026-04-28/
     └── reviews/demo-chat-tpm/

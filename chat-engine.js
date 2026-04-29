@@ -1,5 +1,5 @@
 // Pure logic for the TPM Buddy chat. No DOM access — directly testable.
-// See docs/architecture/adr/ADR-002-canned-responses.md for the decision.
+// See .copilot-tracking/adrs/2026-04-28/ADR-002-canned-responses.md for the decision.
 
 export const REPLIES = {
   status: [

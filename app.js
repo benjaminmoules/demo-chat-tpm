@@ -1,5 +1,5 @@
 // DOM glue for the TPM Buddy chat. Pure logic lives in chat-engine.js.
-// Agentic mode is opt-in (ADR-003) — see docs/architecture/adr/ADR-003-azure-agentic-mode.md.
+// Agentic mode is opt-in (ADR-003) — see .copilot-tracking/adrs/2026-04-28/ADR-003-azure-agentic-mode.md.
 import {
   classify,
   createReplyPicker,

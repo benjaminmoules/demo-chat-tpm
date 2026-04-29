@@ -12,27 +12,16 @@ Produces architectural decisions backed by explicit trade-off analysis.
 
 ## Output
 
-* `.copilot-tracking/adrs/<date>/ADR-<id>-<slug>.md` — canonical record.
-* Optional: `.copilot-tracking/sdlc/<feature-slug>/architecture.md` — a
-  living architecture summary referencing the ADRs.
+* `.copilot-tracking/adrs/<date>/ADR-<id>-<slug>.md` — canonical and only
+  record. Do not duplicate ADRs elsewhere.
+* `docs/architecture/overview.md` — living architecture map (Mermaid
+  component + sequence diagrams) that **references** the ADRs above
+  rather than restating them.
 
 ## ADR Template
 
-```markdown
-# ADR-<id> — <decision>
-
-| Field | Value |
-|---|---|
-| Status | Proposed / Accepted / Rejected / Superseded |
-| Date | <YYYY-MM-DD> |
-| Deciders | <agents / humans> |
-
-## Context
-## Decision
-## Consequences (positive / negative)
-## Rejected alternatives
-## Validation
-```
+Use [`.github/templates/adr.template.md`](../templates/adr.template.md)
+verbatim. Do not inline a different version.
 
 ## Hard Rules
 

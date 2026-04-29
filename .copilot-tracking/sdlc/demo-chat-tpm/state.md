@@ -34,7 +34,7 @@
 | 2 | PRD Definition | done | docs/product/prd.md | 2026-04-28 |
 | 3 | Backlog Planning | done | docs/product/backlog.md · GitHub issues #1, #2 | 2026-04-28 |
 | 4 | Mockup | done | docs/product/mockup.html | 2026-04-28 |
-| 5 | Architecture and ADRs | done | .copilot-tracking/adrs/2026-04-28/ (ADR-001..ADR-003) · docs/architecture/adr/ (mirror) | 2026-04-28 |
+| 5 | Architecture and ADRs | done | .copilot-tracking/adrs/2026-04-28/ (ADR-001..ADR-003) · docs/architecture/overview.md | 2026-04-28 |
 | 6 | DB Schema | skipped | no DB in scope | 2026-04-28 |
 | 7 | RPI Implementation | done | .copilot-tracking/plans/2026-04-28/ · .copilot-tracking/changes/2026-04-28/ (F-001, F-002, F-006) | 2026-04-28 |
 | 8 | PR Review | done | .copilot-tracking/reviews/demo-chat-tpm/pr-review-1.md · pr-review-2.md · pr-review-3.md | 2026-04-28 |
