@@ -58,6 +58,17 @@ body {
 }
 .clear:hover { background: rgba(255, 255, 255, 0.28); }
 
+.agentic-badge {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+}
+.agentic-badge[hidden] { display: none; }
+
 .presets {
   display: flex;
   flex-wrap: wrap;

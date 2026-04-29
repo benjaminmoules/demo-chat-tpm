@@ -3,7 +3,7 @@
 
 // @vitest-environment jsdom
 
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
@@ -17,6 +17,10 @@ async function loadPage() {
   await import("../app.js");
   document.dispatchEvent(new Event("DOMContentLoaded"));
   window.dispatchEvent(new Event("DOMContentLoaded"));
+}
+
+async function flushMicrotasks(times = 5) {
+  for (let i = 0; i < times; i++) await Promise.resolve();
 }
 
 beforeEach(async () => {
@@ -78,5 +82,69 @@ describe("F-002 personality + presets", () => {
     const rows = document.querySelectorAll(".thread .row");
     expect(rows.length).toBe(1);
     expect(rows[0].classList.contains("bot")).toBe(true);
+  });
+});
+
+describe("F-006 agentic mode", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.useRealTimers();
+  });
+
+  async function loadWithAgentic({ agentReply, agentReject } = {}) {
+    const fetchMock = vi.fn(async (url) => {
+      if (String(url).endsWith("/api/agent/health")) {
+        return { ok: true, status: 200, json: async () => ({ enabled: true }) };
+      }
+      if (String(url).endsWith("/api/agent")) {
+        if (agentReject) throw agentReject;
+        return { ok: true, status: 200, json: async () => ({ reply: agentReply }) };
+      }
+      throw new Error(`unexpected fetch: ${url}`);
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    await loadPage();
+    // Let the health probe resolve and flip agenticEnabled = true.
+    await flushMicrotasks(10);
+    return fetchMock;
+  }
+
+  it("AC2: health probe enables agentic mode and shows the badge", async () => {
+    await loadWithAgentic({ agentReply: "Status: green-ish. Standup pending." });
+    expect(document.body.classList.contains("agentic")).toBe(true);
+    const badge = document.getElementById("agentic-badge");
+    expect(badge).toBeTruthy();
+    expect(badge.hidden).toBe(false);
+  });
+
+  it("AC3: a typed message is answered by the model reply", async () => {
+    await loadWithAgentic({ agentReply: "On track. For a slightly different definition of on track." });
+    const input = document.getElementById("input");
+    const form = document.getElementById("composer");
+    input.value = "Status of the release?";
+    form.dispatchEvent(new Event("submit", { cancelable: true }));
+
+    // No fake timers in agentic mode — microtask flush is enough.
+    await flushMicrotasks(20);
+
+    const lastBot = [...document.querySelectorAll(".thread .row.bot .bubble")].pop();
+    expect(lastBot.textContent).toBe("On track. For a slightly different definition of on track.");
+  });
+
+  it("AC5: agent failure falls back to a canned reply", async () => {
+    vi.useFakeTimers();
+    await loadWithAgentic({ agentReject: new TypeError("network boom") });
+    const input = document.getElementById("input");
+    const form = document.getElementById("composer");
+    input.value = "any blockers?";
+    form.dispatchEvent(new Event("submit", { cancelable: true }));
+
+    // Wait for the rejected agentic promise, then advance the canned timer.
+    await flushMicrotasks(20);
+    await vi.advanceTimersByTimeAsync(500);
+
+    const lastBot = [...document.querySelectorAll(".thread .row.bot .bubble")].pop();
+    expect(lastBot.textContent).not.toBe("typing…");
+    expect(lastBot.textContent.length).toBeGreaterThan(0);
   });
 });

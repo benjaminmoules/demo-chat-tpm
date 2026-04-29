@@ -59,3 +59,20 @@ infra, accounts, or build steps.
   saying "the chatbot is intentionally dumb".
 - **Risk**: live coding pressure. **Mitigation**: everything is pre-built;
   the demo is a *walkthrough* of the artifacts and Git history.
+
+## 9. Addendum — F-006 agentic mode (2026-04-28)
+
+A second cycle was kicked off to add a *truly agentic* moment to the demo:
+one feature that swaps the canned engine for a real `gpt-*-mini`
+deployment on Azure OpenAI. Goals and non-goals are amended only where
+necessary; the rest of the PRD stands.
+
+- **Goal G4** — Show that the same SDLC scales from a static prop to a
+  model-backed feature without touching the existing tests' behavior.
+- **Updated non-goal** — *No real LLM call* (section 4) becomes:
+  *No real LLM call by default*. Real calls are opt-in via `.env` and
+  use the dev's `az login` (no API keys, no secrets).
+- **US-3** — As a presenter, I can flip on agentic mode (set three env
+  vars + `az login`) and the same UI starts replying through Azure OpenAI
+  with a TPM persona. With agentic mode off, behavior is unchanged.
+- **AC** — see backlog F-006.

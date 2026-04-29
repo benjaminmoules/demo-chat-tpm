@@ -82,3 +82,41 @@ export function createReplyPicker(replies = REPLIES, rng = Math.random) {
 export function botReply(userText, picker) {
   return picker(classify(userText));
 }
+
+/**
+ * Browser-side caller for the opt-in agentic proxy (ADR-003).
+ * Throws on any error so app.js can fall back to the canned engine.
+ * `fetcher` is injectable for tests.
+ */
+export async function agenticReply(userText, { fetcher } = {}) {
+  const f = fetcher || (typeof fetch === "function" ? fetch : null);
+  if (!f) throw new Error("agent: no fetch available");
+  const res = await f("/api/agent", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ text: String(userText ?? "") }),
+  });
+  if (!res.ok) throw new Error(`agent: http ${res.status}`);
+  const data = await res.json();
+  if (!data || typeof data.reply !== "string" || !data.reply.trim()) {
+    throw new Error("agent: empty reply");
+  }
+  return data.reply.trim();
+}
+
+/**
+ * Probe the server-side health endpoint to decide which engine to use.
+ * Resolves to `false` on any error (canned mode).
+ */
+export async function probeAgentic({ fetcher } = {}) {
+  const f = fetcher || (typeof fetch === "function" ? fetch : null);
+  if (!f) return false;
+  try {
+    const res = await f("/api/agent/health");
+    if (!res.ok) return false;
+    const data = await res.json();
+    return Boolean(data && data.enabled);
+  } catch {
+    return false;
+  }
+}

@@ -5,9 +5,10 @@
   "description": "Tiny TPM-flavored chat demo showcasing an agentic SDLC orchestration approach.",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
+    "start": "node --env-file=.env server.js",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "smoke:agent": "node --env-file=.env scripts/smoke-agent.js"
   },
   "devDependencies": {
     "jsdom": "^24.0.0",

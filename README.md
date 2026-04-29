@@ -135,14 +135,86 @@ mandatory reading for any agent working in that file type.
 
 ---
 
-## Demo features (only 2 — on purpose)
+## Demo features (only 3 — on purpose)
 
 | # | Feature | Issue | PR |
 |---|---------|-------|----|
 | 1 | Base chat UI (input + bubbles + echo) | [#1](../../issues/1) | [#3](../../pull/3) |
 | 2 | TPM personality + quick-prompt presets | [#2](../../issues/2) | [#4](../../pull/4) |
+| 3 | Agentic mode (Azure CLI + Azure OpenAI gpt-mini) | [#5](../../issues/5) | [#5](../../pull/5) |
 
 Tracked on the **[Demo Chat TPM Project board](https://github.com/users/benjaminmoules/projects/1)**.
+
+---
+
+## Optional: agentic mode (real `gpt-*-mini` reply)
+
+F-006 adds a *truly agentic* moment to the demo. It is **off by default** —
+the canned engine still ships unchanged. To turn it on, in your `.env`:
+
+```bash
+AZURE_OPENAI_ENDPOINT=https://<your-aoai>.openai.azure.com
+AZURE_OPENAI_DEPLOYMENT=<your-gpt-mini-deployment-name>
+AZURE_OPENAI_API_VERSION=2024-08-01-preview
+```
+
+Then, in the same shell:
+
+```bash
+az login            # the only auth step — no API key, ever
+npm start
+```
+
+The header now shows a discreet `⚡ agentic` badge. Each message is sent
+to `POST /api/agent`; the server shells `az account get-access-token` and
+proxies to your Azure OpenAI deployment with a short, locked TPM persona.
+If anything fails (no `az`, throttled, network down, malformed reply…),
+the app silently falls back to the canned engine — so the audience always
+sees a TPM bubble.
+
+See [`docs/architecture/adr/ADR-003-azure-agentic-mode.md`](docs/architecture/adr/ADR-003-azure-agentic-mode.md)
+for the decision and trade-offs.
+
+### Live demo resources (already provisioned)
+
+A throwaway environment is provisioned in subscription
+`78fe4846-8b13-459a-8797-898cfb7d0c88`:
+
+| Kind | Name | Notes |
+|---|---|---|
+| Resource group | `rg-demo-chat-tpm` (eastus2) | tagged `project=demo-chat-tpm` |
+| Foundry / AIServices account | `aif-tpm-oyfrh` | `S0`, system-assigned identity, custom subdomain |
+| Model deployment | `gpt-5-mini` (v `2025-08-07`) | `GlobalStandard` SKU, capacity `50` |
+| RBAC | `Cognitive Services OpenAI User` on the account, granted to the signed-in dev | data-plane access for `az` token |
+
+Endpoint: `https://aif-tpm-oyfrh.cognitiveservices.azure.com`. The
+matching values are in [`.env`](.env) (gitignored; placeholders only in
+[`.env.example`](.env.example)).
+
+### Running it locally
+
+```powershell
+# one-time, interactive (browser flow)
+az login --scope https://cognitiveservices.azure.com/.default
+
+# verify the wiring talks to the real model with the Fun TPM persona
+npm run smoke:agent
+
+# start the chat — header shows "⚡ agentic" once the probe succeeds
+npm start
+```
+
+### Tuning the Fun TPM persona
+
+The persona lives in a single constant — `SYSTEM_PROMPT` in [agent.js](agent.js).
+Edit it in place, save, restart `npm start`. The unit test
+*"SYSTEM_PROMPT locks the TPM persona keywords"* enforces a small contract
+(persona name + "never break character" + at least one PM keyword) so
+edits stay on-brand.
+
+> **Cost:** `gpt-5-mini` on `GlobalStandard` is per-token. We cap each
+> reply at `max_completion_tokens=600` and use `reasoning_effort:"minimal"`,
+> so a 15-minute live demo costs well under one cent.
 
 ---
 

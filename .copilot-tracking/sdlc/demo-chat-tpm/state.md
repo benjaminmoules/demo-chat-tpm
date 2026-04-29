@@ -24,6 +24,7 @@
 |-------|-------|--------|--------|----|------|
 | #1 | F-001 — Base chat UI (input, bubbles, echo bot) | feat/F-001-base-chat-ui (deleted) | done | #3 (merged) | 2026-04-28 |
 | #2 | F-002 — TPM personality + preset prompts | feat/F-002-tpm-personality (deleted) | done | #4 (merged) | 2026-04-28 |
+| #5 | F-006 — Agentic mode via Azure CLI + Azure OpenAI gpt-mini | feat/F-006-agentic-azure (deleted) | done | #5 (merged) | 2026-04-28 |
 
 ## Phase Log
 
@@ -33,10 +34,10 @@
 | 2 | PRD Definition | done | docs/product/prd.md | 2026-04-28 |
 | 3 | Backlog Planning | done | docs/product/backlog.md · GitHub issues #1, #2 | 2026-04-28 |
 | 4 | Mockup | done | docs/product/mockup.html | 2026-04-28 |
-| 5 | Architecture and ADRs | done | .copilot-tracking/adrs/2026-04-28/ · docs/architecture/adr/ (mirror) | 2026-04-28 |
+| 5 | Architecture and ADRs | done | .copilot-tracking/adrs/2026-04-28/ (ADR-001..ADR-003) · docs/architecture/adr/ (mirror) | 2026-04-28 |
 | 6 | DB Schema | skipped | no DB in scope | 2026-04-28 |
-| 7 | RPI Implementation | done | .copilot-tracking/plans/2026-04-28/ · .copilot-tracking/changes/2026-04-28/ | 2026-04-28 |
-| 8 | PR Review | done | .copilot-tracking/reviews/demo-chat-tpm/pr-review-1.md · pr-review-2.md | 2026-04-28 |
+| 7 | RPI Implementation | done | .copilot-tracking/plans/2026-04-28/ · .copilot-tracking/changes/2026-04-28/ (F-001, F-002, F-006) | 2026-04-28 |
+| 8 | PR Review | done | .copilot-tracking/reviews/demo-chat-tpm/pr-review-1.md · pr-review-2.md · pr-review-3.md | 2026-04-28 |
 | 9 | Release Gate | done | merged into main; tags pending | 2026-04-28 |
 
 ## Tracking Artifacts
@@ -79,3 +80,25 @@
 - F-003 — localStorage persistence
 - F-004 — light/dark theme toggle
 - F-005 — export thread as Markdown
+- Follow-ups from F-006: token cache until `expiresOn`; `AbortController`
+  timeout in `callAgent()`; deployment-aware persona variants.
+
+## 2026-04-29 — F-006 post-merge fix
+
+- Live Azure resources provisioned: `rg-demo-chat-tpm` (eastus2) →
+  `aif-tpm-oyfrh` AIServices account → `gpt-5-mini` deployment
+  (GlobalStandard, capacity 50). RBAC: current user granted
+  `Cognitive Services OpenAI User` on the account scope.
+- Auth fix in `agent.js`: `--resource` takes a bare URI
+  (`https://cognitiveservices.azure.com`); the `/.default` suffix is
+  `--scope` syntax. The mismatch surfaced as `AADSTS500011` against the
+  resource tenant once we ran the smoke test against live infra. Test
+  in `tests/agent.test.js` updated to match.
+- gpt-5 model quirks captured in `buildRequest`: only `temperature: 1`
+  is accepted; reasoning tokens count toward the budget so we use
+  `max_completion_tokens: 600` and `reasoning_effort: "minimal"`.
+- Better error translation in `runAz` for stale `az` sessions
+  (`AADSTS700082` etc.) so the operator gets a one-line remediation.
+- Live verification: `npm run smoke:agent` passes; `POST /api/agent`
+  on the running server returns model-backed replies. See post-merge
+  section in `.copilot-tracking/changes/2026-04-28/F-006-agentic-azure-changes.md`.
