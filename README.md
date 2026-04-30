@@ -66,8 +66,42 @@ so ES module imports work without `file://` quirks).
 ## Why this repo exists
 
 To show TPM peers **the orchestration approach I follow** for real
-projects, end-to-end, on a 2-feature toy. Every artifact a real run would
+projects, end-to-end, on a 3-feature toy. Every artifact a real run would
 produce is committed here, so you can read the whole story in the file tree.
+
+### What "SDLC" means here
+
+**SDLC** = *Software Development Life Cycle* — the sequence of steps a
+feature goes through from idea to merged code: discovery → product brief
+(PRD) → backlog → mockup → architecture → schema → implementation →
+test → review → release. In a classic team each step has a different
+human owner. In this repo each step has a different **agent** owner,
+coordinated by an SDLC Orchestrator that gates phase transitions on
+human approval where it actually matters (backlog, mockup, architecture,
+release).
+
+### Where the agents come from
+
+Most of the agents driving the cycle (Product Manager Advisor, System
+Architecture Reviewer, RPI, QA Product, PR Review, GitHub Backlog
+Manager, UX/UI Designer) are derived from the open-source
+[**HVE Core**](https://github.com/microsoft/hve-core) agent collection.
+This repo customizes them lightly for a JS demo and adds a thin
+[SDLC Orchestrator](.github/agents/sdlc-orchestrator.agent.md) on top.
+
+The per-agent **role, inputs, and outputs** are not duplicated in this
+README — they live in two authoritative places:
+
+* [`.github/agents/sdlc-orchestrator.agent.md`](.github/agents/sdlc-orchestrator.agent.md)
+  — the orchestrator's phase table, listing which agent owns each phase
+  and what artifact it produces.
+* [`.copilot-tracking/sdlc/demo-chat-tpm/state.md`](.copilot-tracking/sdlc/demo-chat-tpm/state.md)
+  — the live phase log for *this* repo, showing exactly which agent ran,
+  what it produced, and when.
+
+If you want to know what an agent does, read its file in
+[`.github/agents/`](.github/agents); if you want to see what it *did*
+here, read the state file.
 
 ### The cycle
 
@@ -179,21 +213,15 @@ for the decision and trade-offs, and
 [`docs/architecture/overview.md`](docs/architecture/overview.md) for the
 component and sequence diagrams.
 
-### Live demo resources (already provisioned)
+### Bring your own Azure resources
 
-A throwaway environment is provisioned in subscription
-`78fe4846-8b13-459a-8797-898cfb7d0c88`:
-
-| Kind | Name | Notes |
-|---|---|---|
-| Resource group | `rg-demo-chat-tpm` (eastus2) | tagged `project=demo-chat-tpm` |
-| Foundry / AIServices account | `aif-tpm-oyfrh` | `S0`, system-assigned identity, custom subdomain |
-| Model deployment | `gpt-5-mini` (v `2025-08-07`) | `GlobalStandard` SKU, capacity `50` |
-| RBAC | `Cognitive Services OpenAI User` on the account, granted to the signed-in dev | data-plane access for `az` token |
-
-Endpoint: `https://aif-tpm-oyfrh.cognitiveservices.azure.com`. The
-matching values are in [`.env`](.env) (gitignored; placeholders only in
-[`.env.example`](.env.example)).
+This repo does **not** ship a shared endpoint. If you want to try the
+agentic mode, deploy your own throwaway environment — typically a
+resource group with an Azure AI Services (Foundry) account, a
+`gpt-*-mini` model deployment, and the `Cognitive Services OpenAI User`
+role granted to your signed-in identity. Put the resulting values in
+your local `.env` (placeholders are in [`.env.example`](.env.example);
+`.env` itself is gitignored).
 
 ### Running it locally
 
